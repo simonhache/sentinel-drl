@@ -1,0 +1,18 @@
+services:
+  # The Database: TimescaleDB (Postgres with time-series superpowers)
+  timescaledb:
+    image: timescale/timescaledb:latest-pg18
+    container_name: sentinel_db
+    restart: always
+    environment:
+      - POSTGRES_USER=${DB_USER:-admin}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-password123}
+      - POSTGRES_DB=${DB_NAME:-sentinel_trading}
+    ports:
+      - "5432:5432"
+    volumes:
+      - sentinel_db_data:/var/lib/postgresql/data
+
+
+volumes:
+  sentinel_db_data:
