@@ -1,0 +1,19 @@
+[project]
+name = "sentinel-drl"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.14"
+dependencies = [
+    "ccxt>=4.5.30",
+    "numpy>=2.4.0",
+    "pandas>=2.3.3",
+    "torch>=2.9.1",
+]
+
+[dependency-groups]
+dev = [
+    "flake8>=7.3.0",
+    "mypy>=1.19.1",
+    "ruff>=0.14.10",
+]
