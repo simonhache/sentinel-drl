@@ -29,7 +29,7 @@ def test_connection():
             # Test 1: Simple Version Query
             res = connection.execute(text("SELECT version();"))
             version = res.fetchone()[0]
-            print(f"✅ Success! Connected to PostgreSQL.")
+            print("✅ Success! Connected to PostgreSQL.")
             print(f"🔹 Version: {version[:50]}...")
 
             # Test 2: TimescaleDB Specific Check
@@ -48,7 +48,7 @@ def test_connection():
                 )
 
     except OperationalError as e:
-        print(f"❌ Connection Failed!")
+        print("❌ Connection Failed!")
         print(f"Error details: {e}")
     except Exception as e:
         print(f"❌ An unexpected error occurred: {e}")
