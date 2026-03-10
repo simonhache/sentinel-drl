@@ -1,0 +1,18 @@
+services:
+  # The Database: TimescaleDB (Postgres with time-series superpowers)
+  timescaledb:
+    image: timescale/timescaledb:latest-pg18
+    container_name: market_db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=${DB_USER:-admin}
+      - POSTGRES_PASSWORD=${DB_PASSWORD:-very_secure_password}
+      - POSTGRES_DB=${DB_NAME:-sentinel_rl}
+    ports:
+      - "5432:5432"
+    volumes:
+      - market_data:/var/lib/postgresql/data
+      - ./market_db/init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  market_data:

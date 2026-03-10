@@ -10,7 +10,6 @@ dependencies = [
     "numpy>=2.4.0",
     "pandas>=2.3.3",
     "psycopg[binary]>=3.3.2",
-    "redis>=7.1.0",
     "sqlalchemy>=2.0.45",
     "torch>=2.9.1",
 ]
@@ -20,4 +19,18 @@ dev = [
     "flake8>=7.3.0",
     "mypy>=1.19.1",
     "ruff>=0.14.10",
+    "pytest",
+    "pytest_mock",
 ]
+
+[tool.flake8]
+max-line-length =120
+
+[tool.pyright]
+# This stops Pylance from complaining about variables with partially unknown types
+reportUnknownVariableType = false
+reportUnknownMemberType = false
+reportUnknownArgumentType = false
+
+[tool.pytest.ini_options]
+pythonpath = "."
