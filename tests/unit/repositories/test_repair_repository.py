@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 
 from sentinel_rl.ingestion.repair.repair_service import MarketDataRepairService
 from sentinel_rl.ingestion.market.models import OHLCV
+from sentinel_rl.ingestion.repair.repair_service import build_repair_windows
 
 
 @patch("sentinel_rl.ingestion.repair.repair_service.RepairRepository")
@@ -45,3 +46,17 @@ def test_repair_service_processes_missing_windows(mock_session, mock_upsert, moc
 
     assert mock_fetcher.fetch_batch.called
     assert mock_upsert.called
+
+
+def test_window_builder():
+    base = datetime(2023, 1, 1)
+
+    missing = [
+        base,
+        base + timedelta(minutes=15),
+        base + timedelta(minutes=60),
+    ]
+
+    windows = build_repair_windows(missing, 900)
+
+    assert len(windows) == 2
