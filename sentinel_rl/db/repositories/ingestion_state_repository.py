@@ -1,4 +1,4 @@
-from db.models import IngestionState
+from sentinel_rl.db.models import IngestionState
 from sqlalchemy.orm import Session
 from datetime import datetime
 

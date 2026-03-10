@@ -1,6 +1,6 @@
 from datetime import timedelta
 
-from db.session import SessionLocal
+from sentinel_rl.db.session import SessionLocal
 from sentinel_rl.db.repositories.repair_repository import RepairRepository
 from sentinel_rl.ingestion.market.market_fetcher import MarketDataFetcher
 from sentinel_rl.db.repositories.market_repository import UpsertMarketData

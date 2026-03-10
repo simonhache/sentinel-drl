@@ -7,20 +7,21 @@ from sentinel_rl.db.repositories.market_repository import (
     DeleteMarketData,
 )
 from sentinel_rl.db.models import MarketOHLCV
+from sentinel_rl.ingestion.market.models import OHLCV
 
 
 @pytest.fixture
 def sample_rows():
     return [
-        {
-            "timestamp": datetime(2024, 1, 1, tzinfo=timezone.utc),
-            "symbol": "BTC/USDT",
-            "open": 50000,
-            "high": 50500,
-            "low": 49500,
-            "close": 50200,
-            "volume": 120.5,
-        }
+        OHLCV(
+            timestamp=datetime(2024, 1, 1, tzinfo=timezone.utc),
+            symbol="BTC/USDT",
+            open=50000,
+            high=50500,
+            low=49500,
+            close=50200,
+            volume=120.5,
+        )
     ]
 
 
@@ -40,27 +41,27 @@ def test_upsert_market_data_calls_execute_and_commit(
 
 def test_upsert_updates_existing_row(local_db_session_factory: sessionmaker[Session]):
     rows1 = [
-        {
-            "timestamp": datetime(2024, 1, 1, tzinfo=timezone.utc),
-            "symbol": "BTC/USDT",
-            "open": 50000,
-            "high": 50500,
-            "low": 49500,
-            "close": 50200,
-            "volume": 100,
-        }
+        OHLCV(
+            timestamp=datetime(2024, 1, 1, tzinfo=timezone.utc),
+            symbol="BTC/USDT",
+            open=50000,
+            high=50500,
+            low=49500,
+            close=50200,
+            volume=100,
+        )
     ]
 
     rows2 = [
-        {
-            "timestamp": datetime(2024, 1, 1, tzinfo=timezone.utc),
-            "symbol": "BTC/USDT",
-            "open": 50000,
-            "high": 50500,
-            "low": 49500,
-            "close": 51000,
-            "volume": 150,
-        }
+        OHLCV(
+            timestamp=datetime(2024, 1, 1, tzinfo=timezone.utc),
+            symbol="BTC/USDT",
+            open=50000,
+            high=50500,
+            low=49500,
+            close=51000,
+            volume=150,
+        )
     ]
 
     UpsertMarketData.apply(rows1, local_db_session_factory)

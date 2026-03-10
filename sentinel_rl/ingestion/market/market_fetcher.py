@@ -1,4 +1,4 @@
-from ingestion.market.models import normalize_ohlcv, OHLCV
+from sentinel_rl.ingestion.market.models import normalize_ohlcv, OHLCV
 from sentinel_rl.ingestion.market.ccxt_client import ExchangeClient
 
 

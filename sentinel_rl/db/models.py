@@ -1,6 +1,7 @@
 from sqlalchemy import Column, String, Float, Integer, Text, TIMESTAMP
 from sqlalchemy.orm import declarative_base
 from sqlalchemy.schema import PrimaryKeyConstraint
+from datetime import datetime, timezone
 
 Base = declarative_base()
 
@@ -45,4 +46,4 @@ class IngestionState(Base):
 
     source = Column(String, primary_key=True)
     last_timestamp = Column(TIMESTAMP(timezone=True))
-    updated_at = Column(TIMESTAMP(timezone=True), default="now()")
+    updated_at = Column(TIMESTAMP(timezone=True), default=datetime.now(tz=timezone.utc))

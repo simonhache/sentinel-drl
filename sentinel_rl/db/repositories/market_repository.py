@@ -4,7 +4,7 @@ from sentinel_rl.db.session import SessionLocal
 from sqlalchemy.orm import sessionmaker, Session
 from sentinel_rl.db.models import MarketOHLCV
 from abc import ABC, abstractmethod
-from ingestion.market.models import OHLCV
+from sentinel_rl.ingestion.market.models import OHLCV
 
 
 class BasicCRUD(ABC):

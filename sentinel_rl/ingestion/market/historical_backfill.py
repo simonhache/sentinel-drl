@@ -1,13 +1,13 @@
 import time
 from datetime import datetime
 
-from db.session import SessionLocal
+from sentinel_rl.db.session import SessionLocal
 from sentinel_rl.db.repositories.ingestion_state_repository import (
     IngestionStateRepository,
 )
 from sentinel_rl.db.repositories.market_repository import UpsertMarketData
 from sentinel_rl.ingestion.market.market_fetcher import MarketDataFetcher
-from ingestion.market.models import OHLCV
+from sentinel_rl.ingestion.market.models import OHLCV
 
 
 MAX_RETRIES = 5

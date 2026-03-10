@@ -10,16 +10,19 @@ class RepairRepository:
     def find_missing_candles(
         self, symbol: str, start: datetime, end: datetime, timeframe="15 minutes"
     ):
-        query = text("""
+        start_ts = int(start.timestamp())
+        end_ts = int(end.timestamp())
+
+        query = text(f"""
         SELECT expected_ts
         FROM generate_series(
-            :start,
-            :end,
-            interval :tf
+            {start_ts},
+            {end_ts},
+            interval '{timeframe}'
         ) AS expected_ts
         LEFT JOIN market_ohlcv m
         ON m.timestamp = expected_ts
-        AND m.symbol = :symbol
+        AND m.symbol = '{symbol}'
         WHERE m.timestamp IS NULL
         ORDER BY expected_ts
         """)
