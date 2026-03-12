@@ -39,7 +39,10 @@ def test_repair_service_processes_missing_windows(mock_session, mock_upsert, moc
     ]
 
     service = MarketDataRepairService(
-        fetcher=mock_fetcher, symbol="BTC/USDT", timeframe_seconds=900
+        fetcher=mock_fetcher,
+        repository=mock_repo_instance,
+        symbol="BTC/USDT",
+        timeframe_seconds=900,
     )
 
     service.repair(base, base + timedelta(hours=1))

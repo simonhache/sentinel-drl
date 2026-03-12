@@ -47,3 +47,19 @@ class IngestionState(Base):
     source = Column(String, primary_key=True)
     last_timestamp = Column(TIMESTAMP(timezone=True))
     updated_at = Column(TIMESTAMP(timezone=True), default=datetime.now(tz=timezone.utc))
+
+
+class FeatureCandle(Base):
+    __tablename__ = "feature_candle"
+
+    timestamp = Column(TIMESTAMP(timezone=True), nullable=False)
+    symbol = Column(String, nullable=False)
+
+    # Features list
+    return_1 = Column(Float)
+    return_5 = Column(Float)
+    volatility_20 = Column(Float)
+    volume_zscore = Column(Float)
+    sentiment_mean = Column(Float)
+
+    __table_args__ = (PrimaryKeyConstraint("timestamp", "symbol"),)

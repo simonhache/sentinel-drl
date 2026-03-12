@@ -63,3 +63,23 @@ CREATE TABLE IF NOT EXISTS ingestion_state(
     last_timestamp TIMESTAMPTZ
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
+
+
+-- Schema for Feature Candle data
+
+CREATE TABLE feature_candles (
+
+    timestamp TIMESTAMPTZ NOT NULL,
+    symbol TEXT NOT NULL,
+
+    return_1 REAL,
+    return_5 REAL,
+
+    volatility_20 REAL,
+
+    volume_zscore REAL,
+
+    sentiment_mean REAL,
+
+    PRIMARY KEY(symbol, timestamp)
+);

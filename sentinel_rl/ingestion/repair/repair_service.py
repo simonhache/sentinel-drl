@@ -31,16 +31,20 @@ def build_repair_windows(missing_ts, timeframe_seconds):
 
 
 class MarketDataRepairService:
-    def __init__(self, fetcher: MarketDataFetcher, symbol: str, timeframe_seconds: int):
+    def __init__(
+        self,
+        fetcher: MarketDataFetcher,
+        repository: RepairRepository,
+        symbol: str,
+        timeframe_seconds: int,
+    ):
         self.fetcher = fetcher
+        self.repo = repository
         self.symbol = symbol
         self.tf_seconds = timeframe_seconds
 
     def repair(self, start: datetime, end: datetime):
-        with SessionLocal() as session:
-            repo = RepairRepository(session)
-
-            missing = repo.find_missing_candles(self.symbol, start, end)
+        missing = self.repo.find_missing_candles(self.symbol, start, end)
 
         if not missing:
             print("No gaps detected")
